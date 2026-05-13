@@ -332,5 +332,22 @@
   <div class="footer">© 2026 Doctor Yaad · <a href="https://doctoryaad.com/?utm_source=instagram&amp;utm_medium=bio_link&amp;utm_content=footer">doctoryaad.com</a></div>
 
 </div><!-- /page-card -->
+<script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var src = params.get('utm_source');
+    var med = params.get('utm_medium');
+    if (!src && !med) return;
+    document.querySelectorAll('a[href*="doctoryaad.com"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (u.hostname === 'links.doctoryaad.com') return;
+        if (src) u.searchParams.set('utm_source', src);
+        if (med) u.searchParams.set('utm_medium', med);
+        a.href = u.toString();
+      } catch (e) {}
+    });
+  })();
+</script>
 </body>
 </html>
